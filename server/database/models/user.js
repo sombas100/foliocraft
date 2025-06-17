@@ -53,6 +53,11 @@ module.exports = (sequelize, DataTypes) => {
     linkedInLink: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    role: {
+      type: DataTypes.ENUM('admin', 'user'),
+      allowNull: false,
+      defaultValue: 'user',
     }
   }, {
     sequelize,

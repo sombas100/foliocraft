@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Theme.hasMany(models.Portfolio, { foreignKey: 'themeId' })
     }
   }
-  Themes.init({
+  Theme.init({
     name: {
       type: DataTypes.STRING,
       allowNull: false,
