@@ -20,14 +20,14 @@ const authenticate = (req, res, next) => {
 
 const requirePaidUser = (req, res, next) => {
     if (req.user.subscriptionStatus !== 'PAID') {
-        return res.status(403).json({ message: 'This feature requires pro membership'})
+        return res.status(403).json({ message: 'This feature requires pro membership' })
     }
     next();
 }
 
 const requireAdmin = (req, res, next) => {
     if (req.user.role !== 'admin') {
-        return res.status(401).json({ message: 'Unathorized. Admin only'})
+        return res.status(401).json({ message: 'Unathorized. Admin only' })
     }
 }
 
