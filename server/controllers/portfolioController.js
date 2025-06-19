@@ -1,7 +1,7 @@
 const { User, Theme, Portfolio } = require('../database/models');
 
 const getMyPortfolio = async (req, res) => {
-    const userId = req.user.userId;
+    const userId = req.user.id;
     try {
         const portfolio = await Portfolio.findOne({ 
             where: { userId },
@@ -23,7 +23,7 @@ const getPublicPortfolio = async (req, res) => {
 
         const portfolio = await Portfolio.findOne({ where: { userId: user.id }, include: [Theme]});
 
-        res.status(200).json(portfolio, user)
+        res.status(200).json({ user , portfolio })
     } catch (error) {
         console.error(error)
         res.status(500).json({ message: 'Internal server error', error: error.message });
@@ -32,7 +32,7 @@ const getPublicPortfolio = async (req, res) => {
 
 const createPortfolio = async (req, res) => {
     const { title, about, skills, projects, themeId } = req.body;
-    const userId = req.user.userId
+    const userId = req.user.id
 
     try {
         const existingPortfolio = await Portfolio.findOne({ where: { userId }});
@@ -56,7 +56,7 @@ const createPortfolio = async (req, res) => {
 const updatePortfolio = async (req, res) => {
     const { title, about, skills, projects, themeId } = req.body;
     const { id } = req.params
-    const userId = req.user.userId;
+    const userId = req.user.id;
 
     try {
         const portfolio = await Portfolio.findOne({ 
@@ -81,7 +81,7 @@ const updatePortfolio = async (req, res) => {
 
 const deletePortfolio = async (req, res) => {
     const { id } = req.params;
-    const userId = req.user.userId;
+    const userId = req.user.id;
     try {
         const portfolio = await Portfolio.findOne({ where: { id }});
         if (!portfolio) return res.status(404).json({ message: 'Portfolio does not exist' });

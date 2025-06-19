@@ -38,6 +38,8 @@ const handleStripeWebhook = async (req, res) => {
       } else {
         console.warn(`⚠️ No user found for Stripe customer: ${customerId}`);
       }
+      console.log(`Session ID: ${session.id}`);
+
     } catch (err) {
       console.error('Error updating user:', err.message);
     }
